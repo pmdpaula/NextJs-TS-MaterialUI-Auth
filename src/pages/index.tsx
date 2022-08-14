@@ -34,7 +34,8 @@ const Home: NextPage = () => {
           AxeBlade - Template base
         </Typography>
         <Typography align="center" component="p" variant="h6" gutterBottom>
-          Modelo base de uma WebApplication com Nextjs 12, Material UI v5
+          Modelo base de uma WebApplication com Nextjs 12, Material UI v5 e
+          autenticação com Auth0
         </Typography>
       </Box>
     </Container>

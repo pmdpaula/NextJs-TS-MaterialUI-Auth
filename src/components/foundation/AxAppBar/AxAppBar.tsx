@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
+import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu';
 import AppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
@@ -13,10 +15,12 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import Image from 'next/image';
 import { useTheme as useThemeNT } from 'next-themes';
+import { useContext } from 'react';
 
 import globalDefinitions from '../../../config/globalDefinitions';
 import ThemeSwitch from '../../commons/ThemeSwitch/ThemeSwitch';
-import Link from '../Link';
+import { WebsitePageContext } from '../../wrappers/WebsitePage/context/index';
+import Link from '../Link/Link';
 import AppBarRightSmallScreen from './AppBarRightSmallScreen';
 
 const { drawerWidth } = globalDefinitions;
@@ -53,6 +57,7 @@ const AxAppBar = ({
   hasDrawer,
 }: AxAppBarProps): JSX.Element => {
   const { theme: dataTheme, setTheme, resolvedTheme } = useThemeNT(); // useTheme from next-themes
+  const websitePageContext = useContext(WebsitePageContext);
 
   function toggleTheme(): void {
     setTheme(dataTheme === 'light' ? 'dark' : 'light');
@@ -111,19 +116,38 @@ const AxAppBar = ({
               pointerEvents: { xs: 'none', md: 'auto' },
             }}
           >
-            <Link href="/app/profile">
-              <Tooltip title="Perfil" arrow placement="bottom">
-                <IconButton color="inherit">
-                  <AssignmentIndIcon />
-                </IconButton>
-              </Tooltip>
-            </Link>
             <ThemeSwitch toggleTheme={toggleTheme} />
-            <Tooltip title="Sair" arrow placement="bottom">
-              <IconButton color="inherit">
-                <ExitToAppOutlinedIcon />
-              </IconButton>
-            </Tooltip>
+            {websitePageContext?.userLogged ? (
+              <>
+                <Link href="/app/profile">
+                  <Tooltip title="Perfil" arrow placement="bottom">
+                    <IconButton color="inherit">
+                      <AssignmentIndIcon />
+                    </IconButton>
+                  </Tooltip>
+                </Link>
+                <Link href="/api/auth/logout">
+                  <Tooltip title="Sair" arrow placement="bottom">
+                    <IconButton color="error">
+                      <LogoutIcon />
+                    </IconButton>
+                  </Tooltip>
+                </Link>
+              </>
+            ) : (
+              <Link href="/api/auth/login">
+                <Tooltip title="Login" arrow placement="bottom">
+                  <Button
+                    variant="contained"
+                    disableElevation
+                    size="small"
+                    endIcon={<LoginIcon />}
+                  >
+                    Login
+                  </Button>
+                </Tooltip>
+              </Link>
+            )}
           </Box>
 
           <AppBarRightSmallScreen toggleTheme={toggleTheme} />

@@ -1,17 +1,16 @@
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
-import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
+import LogoutIcon from '@mui/icons-material/Logout';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import ThemeSwitch from '../../commons/ThemeSwitch/ThemeSwitch';
+import { WebsitePageContext } from '../../wrappers/WebsitePage/context/index';
+import Link from '../Link/Link';
 // import { AuthContext } from '../../wrappers/WebsitePage/context/AuthContext';
-// import { WebsitePageContext } from '../../wrappers/WebsitePage/context/index';
-import Link from '../Link/index';
-
 interface AppBarRightSmallScreenProps {
   // eslint-disable-next-line no-unused-vars
   toggleTheme: (_event: any) => void;
@@ -22,6 +21,7 @@ const AppBarRightSmallScreen = ({
   toggleTheme,
 }: AppBarRightSmallScreenProps): JSX.Element => {
   // const { signOut } = useContext(AuthContext);
+  const websitePageContext = useContext(WebsitePageContext);
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const openMenuProfile = Boolean(anchorEl);
@@ -61,24 +61,38 @@ const AppBarRightSmallScreen = ({
         onClose={handleClose}
       >
         <MenuItem onClick={handleClose}>
-          {' '}
-          <Link href="/profile">
-            <IconButton color="inherit">
-              <AssignmentIndIcon />
-            </IconButton>
-            Perfil
-          </Link>
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
           <ThemeSwitch toggleTheme={toggleTheme} />
           Tema
         </MenuItem>
-        <MenuItem>
-          <IconButton color="inherit">
-            <ExitToAppOutlinedIcon />
-          </IconButton>
-          Sair
-        </MenuItem>
+        {websitePageContext?.userLogged ? (
+          <div>
+            <MenuItem onClick={handleClose}>
+              <Link href="/profile">
+                <IconButton color="inherit">
+                  <AssignmentIndIcon />
+                </IconButton>
+                Perfil
+              </Link>
+            </MenuItem>
+            <MenuItem>
+              <Link href="/logout">
+                <IconButton color="error">
+                  <LogoutIcon />
+                </IconButton>
+                Sair
+              </Link>
+            </MenuItem>
+          </div>
+        ) : (
+          <MenuItem onClick={handleClose}>
+            <Link href="/login">
+              <IconButton color="inherit">
+                <AssignmentIndIcon />
+              </IconButton>
+              Login
+            </Link>
+          </MenuItem>
+        )}
       </Menu>
     </Box>
   );

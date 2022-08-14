@@ -4,7 +4,7 @@
 import { ThemeProvider } from 'next-themes';
 
 import WebsitePageWrapper from '..';
-import { WrapperProvider } from '../context/index';
+import { WrapperProvider } from '../context';
 import WebsiteGlobalProvider from '../provider';
 
 export default function websitePageHOC(
