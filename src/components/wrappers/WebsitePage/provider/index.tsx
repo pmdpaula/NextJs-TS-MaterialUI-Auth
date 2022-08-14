@@ -28,14 +28,10 @@ export default function WebsiteGlobalProvider({
   }, [resolvedTheme]);
 
   return (
-    // <MuiThemeProvider
-    //   theme={websitePageContext.isDark ? themeDark : themeLight}
-    // >
     <ThemeProvider theme={currentTheme}>
       <CssBaseline />
       {/* <GlobalStyle /> */}
       {children}
     </ThemeProvider>
-    // </MuiThemeProvider>
   );
 }

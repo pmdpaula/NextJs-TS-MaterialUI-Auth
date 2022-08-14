@@ -14,6 +14,7 @@
     "test:integration": "cypress run --headless"
   },
   "dependencies": {
+    "@auth0/nextjs-auth0": "^1.9.1",
     "@emotion/cache": "latest",
     "@emotion/react": "latest",
     "@emotion/server": "latest",
@@ -23,6 +24,7 @@
     "@mui/material": "latest",
     "@mui/styles": "^5.2.3",
     "@mui/system": "^5.2.3",
+    "clsx": "^1.2.1",
     "color": "^4.1.0",
     "lodash": "^4.17.21",
     "next": "latest",
@@ -30,7 +32,6 @@
     "react": "latest",
     "react-dom": "latest",
     "react-hook-form": "^7.25.0",
-    "styled-components": "^5.3.3",
     "yup": "^0.32.11"
   },
   "devDependencies": {

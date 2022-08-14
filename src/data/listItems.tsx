@@ -23,7 +23,7 @@ export const menutItems: menutItemsProps[] = [
     link: '/',
     name: 'Home',
     Icon: BarChartIcon,
-    access: 'default',
+    access: 'all',
     disabled: false,
   },
   {
@@ -140,10 +140,28 @@ export const menutItems: menutItemsProps[] = [
   },
   {
     ident: 'admin',
-    link: '/admin',
+    // link: '/admin',
     name: 'Administração',
     Icon: BusinessCenterIcon,
     access: 'admin',
-    disabled: true,
+    disabled: false,
+    items: [
+      {
+        ident: 'config',
+        link: '/app/config',
+        name: 'Configurações',
+        // Icon: AssignmentIndIcon,
+        access: 'admin',
+        disabled: true,
+      },
+      {
+        ident: 'profile',
+        link: '/app/profile',
+        name: 'Perfil de Usuário',
+        // Icon: AssignmentIndIcon,
+        access: 'default',
+        disabled: false,
+      },
+    ],
   },
 ];

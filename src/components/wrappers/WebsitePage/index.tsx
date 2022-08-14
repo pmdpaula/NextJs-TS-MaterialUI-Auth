@@ -4,13 +4,14 @@ import Container from '@mui/material/Container';
 import { styled, useTheme } from '@mui/material/styles';
 import { useContext, useEffect, useState } from 'react';
 
+// import { WebsitePageWrapperProps } from './index.d';
+import { WebsitePageWrapperProps } from '../../../../types/indexWrapper.d';
 import { ThemeProps } from '../../../theme/themeLight';
 import AxAppBar from '../../foundation/AxAppBar/AxAppBar';
 import AxDrawer from '../../foundation/AxDrawer/AxDrawer';
 import AxFooter from '../../foundation/AxFooter/AxFooter';
 import SEO from '../../foundation/SEO';
 import { WebsitePageContext } from './context/index';
-import { WebsitePageWrapperProps } from './index.d';
 
 const DrawerAnchor = styled('div')({
   display: 'flex',
@@ -42,9 +43,9 @@ const WebsitePageWrapper = ({
   const [openDrawer, setOpenDrawer] = useState<boolean>(!isDrawerCloseble);
   const [mounted, setMounted] = useState(false);
 
-  function toggleOpenDrawer() {
+  const toggleOpenDrawer = () => {
     setOpenDrawer(isDrawerCloseble ? !openDrawer : true);
-  }
+  };
 
   // eslint-disable-next-line operator-linebreak
   const toggleDrawer =

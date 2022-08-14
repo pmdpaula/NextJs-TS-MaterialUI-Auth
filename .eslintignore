@@ -38,3 +38,7 @@ yarn-error.log*
 
 # Jest Tests
 *.test.*
+
+
+# Arquivos temporários
+/tmp
